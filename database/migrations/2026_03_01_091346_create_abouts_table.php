@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
+            $table->text('description');
+            $table->unsignedBigInteger('create_by')->nullable();
+            $table->unsignedBigInteger('update_by')->nullable();
             $table->timestamps();
         });
     }
