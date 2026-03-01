@@ -13,20 +13,15 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // varchar translates to string
+            $table->string('title');
             $table->text('description');
-
-            // Foreign Key Configuration
-            // Assuming modern Laravel where referenced IDs are unsigned big integers
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')
                   ->references('user_id')
                   ->on('user_accounts')
-                  ->onDelete('cascade'); // Adjust the onDelete behavior as needed
-
+                  ->onDelete('cascade');
             $table->date('created_date');
-            $table->date('expiry_date')->nullable(); // Made nullable assuming expiry is optional
-
+            $table->date('expiry_date')->nullable();
             $table->string('status');
             $table->string('priority');
             $table->timestamps();

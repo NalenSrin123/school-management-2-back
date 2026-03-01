@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('request_documents', function (Blueprint $table) {
             $table->id();
-             $table->id(); // ID
             $table->foreignId('user_id')
                   ->constrained('users')
                   ->onDelete('cascade');
@@ -23,8 +22,6 @@ return new class extends Migration
           $table->string('status')->default('pending');
 
             $table->timestamp('request_date')->useCurrent();
-
-            $table->timestamps();
             $table->timestamps();
         });
     }
