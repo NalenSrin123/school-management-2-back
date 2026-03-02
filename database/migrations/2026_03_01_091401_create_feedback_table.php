@@ -13,16 +13,12 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('user_id');
             $table->string('subject');
             $table->text('message');
             $table->integer('rating')->nullable();
             $table->string('status')->default('Pending');
-
             $table->timestamp('created_at')->useCurrent();
-
-            
             $table->foreign('user_id')
                   ->references('UserID')
                   ->on('user_accounts')

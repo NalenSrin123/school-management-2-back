@@ -14,13 +14,10 @@ return new class extends Migration
         Schema::create('request_documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->onDelete('cascade');
-
+                ->constrained('users')
+                ->onDelete('cascade');
             $table->string('document_type');
-
-          $table->string('status')->default('pending');
-
+            $table->string('status')->default('pending');
             $table->timestamp('request_date')->useCurrent();
             $table->timestamps();
         });
