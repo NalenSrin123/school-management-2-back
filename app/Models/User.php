@@ -19,12 +19,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id',
-        'name',
-        'email',
-        'password',
-        'is_active',
-    ];
+    'role_id', 'name', 'email', 'password', 'is_active', 'remember_token'
+];
 
     /**
      * The attributes that should be hidden for serialization.
