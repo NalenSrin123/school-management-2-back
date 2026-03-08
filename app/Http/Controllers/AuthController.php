@@ -19,14 +19,14 @@ class AuthController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:6',
-                // role_id optional
+
                 'role_id' => 'sometimes|exists:roles,id',
             ]);
 
-            // Default role_id = 2 (user)
+
             $role_id = $validated['role_id'] ?? 2;
 
-            // Create user
+
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'remember_token' => Str::random(10),
             ]);
 
-            // Create token (Sanctum)
+           
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
