@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('subject');
             $table->text('message');
             $table->integer('rating')->nullable();
             $table->string('status')->default('Pending');
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
+
             $table->foreign('user_id')
-                  ->references('UserID')
-                  ->on('user_accounts')
-                  ->cascadeOnDelete();
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
 

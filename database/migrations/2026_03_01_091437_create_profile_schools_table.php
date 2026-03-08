@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('profile_schools', function (Blueprint $table) {
             $table->id();
             $table->text('image');
-            $table->timestamp('created_by');
-            $table->timestamp('updated_by');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 
