@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->date('created_date');
+            $table->date('expiry_date')->nullable();
+            $table->string('status');
+            $table->string('priority');
             $table->timestamps();
         });
     }
