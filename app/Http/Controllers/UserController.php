@@ -14,7 +14,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Plucked out the query() as it's not strictly needed when using with()
         $users = User::with('role')->latest()->paginate(10);
 
         return response()->json($users);
@@ -29,9 +28,7 @@ class UserController extends Controller
             'name'      => 'required|string|max:255',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required|string|min:8',
-            // Changed to an integer instead of an array since a user has one role
             'role_id'   => 'required|integer|exists:roles,id', 
-            // Nullable so if they don't send it, it won't fail validation
             'is_active' => 'nullable|boolean', 
         ]);
 
@@ -43,7 +40,6 @@ class UserController extends Controller
                 'email'     => $validated['email'],
                 'password'  => bcrypt($validated['password']),
                 'role_id'   => $validated['role_id'],
-                // If they didn't provide is_active, default it to true
                 'is_active' => $validated['is_active'] ?? true, 
             ]);
 
@@ -51,7 +47,7 @@ class UserController extends Controller
 
             return response()->json([
                 'message' => 'User Created Successfully',
-                'data'    => $user->load('role'), // Singular 'role' to match index method
+                'data'    => $user->load('role'), 
             ], 201);
 
         } catch (\Exception $e) {
@@ -99,7 +95,6 @@ class UserController extends Controller
                 'is_active' => $validated['is_active'],
             ];
 
-            // Only update the password if a new one was actually provided
             if (!empty($validated['password'])) {
                 $dataToUpdate['password'] = bcrypt($validated['password']);
             }
