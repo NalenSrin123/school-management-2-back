@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/auth/google/login', [GoogleLoginController::class, 'login']);
+
+
+//user crud
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('user.show');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+

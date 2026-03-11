@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail;
+    use HasApiTokens, HasFactory, MustVerifyEmail, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +19,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * @var array<int, string>
      */
     protected $fillable = [
-    'role_id', 'name', 'email', 'password', 'is_active', 'remember_token'
-];
+        'role_id',
+        'name',
+        'email',
+        'password',
+        'is_active',
+        'remember_token',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,7 +47,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
     ];
 
     public function linkedSocialAccounts()
-{
-    return $this->hasOne(LinkedGoogleAccount::class);
-}
+    {
+        return $this->hasOne(LinkedGoogleAccount::class);
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }
