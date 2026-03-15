@@ -23,7 +23,7 @@ class AuthController extends Controller
                 'role_id' => 'sometimes|exists:roles,id',
             ]);
 
-
+            
             $role_id = $validated['role_id'] ?? 2;
 
 
@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'remember_token' => Str::random(10),
             ]);
 
-           
+
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
