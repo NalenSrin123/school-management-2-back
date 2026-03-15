@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class RoadMap extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['image', 'title', 'description'];
 }
