@@ -10,6 +10,7 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\UserController;
 use App\Models\Role;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\VideoGuideLineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,5 @@ Route::post('/otp/verify', [OtpController::class, 'verifyOtp']);
 Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
 
 Route::apiResource('roadmaps', RoadMapController::class);
+
+Route::apiResource('videoguidelines', VideoGuideLineController::class);
