@@ -14,7 +14,7 @@ class CourseController extends Controller
     public function index()
     {
         try {
-            $courses = Course::all();
+            $courses = Course::query()->latest()->paginate(8);
 
             return response()->json([
                 'success' => true,

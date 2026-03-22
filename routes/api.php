@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\Role;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ProfileSchoolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 });
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile-schools', [ProfileSchoolController::class, 'index']);
+    Route::post('/profile-schools', [ProfileSchoolController::class, 'store']);
+    Route::get('/profile-schools/{id}', [ProfileSchoolController::class, 'show']);
+    Route::put('/profile-schools/{id}', [ProfileSchoolController::class, 'update']);
+    Route::delete('/profile-schools/{id}', [ProfileSchoolController::class, 'destroy']);
+});
+
 
 
