@@ -63,5 +63,5 @@ Route::apiResource('videoguidelines', VideoGuideLineController::class);
 // Courses
 Route::get('/courses', [CourseController::class, 'index']);
 Route::get('/courses-most-viewed', [CourseController::class, 'mostViewed']);
-Route::get('/courses/{id}', [CourseController::class, 'show']); // ← auto increments on every visit
+Route::get('/courses/{id}', [CourseController::class, 'show']);
 
