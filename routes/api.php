@@ -8,8 +8,8 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\UserController;
-use App\Models\Role;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfileSchoolController;
 use App\Http\Controllers\VideoGuideLineController;
 
@@ -68,6 +68,8 @@ Route::apiResource('roadmaps', RoadMapController::class);
 
 Route::apiResource('videoguidelines', VideoGuideLineController::class);
 
+Route::post('/feedbacks', [FeedbackController::class, 'store']);
+Route::apiResource('feedbacks', FeedbackController::class)->except(['store'])->middleware('auth:sanctum');
 
 // Courses
 Route::get('/courses', [CourseController::class, 'index']);
