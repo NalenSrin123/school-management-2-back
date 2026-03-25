@@ -58,3 +58,10 @@ Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
 Route::apiResource('roadmaps', RoadMapController::class);
 
 Route::apiResource('videoguidelines', VideoGuideLineController::class);
+
+
+// Courses
+Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/courses-most-viewed', [CourseController::class, 'mostViewed']);
+Route::get('/courses/{id}', [CourseController::class, 'show']);
+
