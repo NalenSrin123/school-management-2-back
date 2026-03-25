@@ -20,7 +20,6 @@ class CourseController extends Controller
                 'success' => true,
                 'data' => $courses
             ]);
-
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
@@ -45,14 +44,12 @@ class CourseController extends Controller
                 'message' => 'Course created successfully',
                 'data' => $course
             ]);
-
         } catch (Exception $e) {
 
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
             ], 500);
-
         }
     }
 
@@ -63,18 +60,18 @@ class CourseController extends Controller
 
             $course = Course::findOrFail($id);
 
+            $course->increment('views');
+
             return response()->json([
                 'success' => true,
-                'data' => $course
+                'data' => $course->fresh()
             ]);
-
         } catch (Exception $e) {
 
             return response()->json([
                 'success' => false,
                 'message' => 'Course not found'
             ], 404);
-
         }
     }
 
@@ -96,14 +93,12 @@ class CourseController extends Controller
                 'message' => 'Course updated successfully',
                 'data' => $course
             ]);
-
         } catch (Exception $e) {
 
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
             ], 500);
-
         }
     }
 
@@ -119,14 +114,31 @@ class CourseController extends Controller
                 'success' => true,
                 'message' => 'Course deleted successfully'
             ]);
-
         } catch (Exception $e) {
 
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
             ], 500);
-
         }
     }
+
+    // Get all courses sorted by most views
+    public function mostViewed()
+    {
+        try {
+            $courses = Course::orderBy('views', 'desc')->get();
+
+            return response()->json([
+                'success' => true,
+                'data' => $courses
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 }
