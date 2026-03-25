@@ -10,6 +10,7 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ProfileSchoolController;
 use App\Http\Controllers\VideoGuideLineController;
 
 /*
@@ -36,6 +37,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 });
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile-schools', [ProfileSchoolController::class, 'index']);
+    Route::post('/profile-schools', [ProfileSchoolController::class, 'store']);
+    Route::get('/profile-schools/{id}', [ProfileSchoolController::class, 'show']);
+    Route::put('/profile-schools/{id}', [ProfileSchoolController::class, 'update']);
+    Route::delete('/profile-schools/{id}', [ProfileSchoolController::class, 'destroy']);
+});
+
 
 
 
@@ -61,3 +70,9 @@ Route::apiResource('videoguidelines', VideoGuideLineController::class);
 
 Route::post('/feedbacks', [FeedbackController::class, 'store']);
 Route::apiResource('feedbacks', FeedbackController::class)->except(['store'])->middleware('auth:sanctum');
+
+// Courses
+Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/courses-most-viewed', [CourseController::class, 'mostViewed']);
+Route::get('/courses/{id}', [CourseController::class, 'show']);
+
