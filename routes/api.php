@@ -27,8 +27,8 @@ use App\Http\Controllers\VideoGuideLineController;
 Route::post('/auth/google/login', [GoogleLoginController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/send-otp', [AuthController::class, 'sendOtp']);
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+// Route::post('/send-otp', [AuthController::class, 'sendOtp']);
+// Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 
 // Route::middleware('auth:sanctum')->group(function () {
     Route::get('/courses', [CourseController::class, 'index']);
@@ -58,9 +58,9 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 // });
 
 
-Route::post('/register', [OtpController::class, 'register']);
-Route::post('/otp/verify', [OtpController::class, 'verifyOtp']);
-Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
+// Route::post('/register', [OtpController::class, 'register']);
+// Route::post('/otp/verify', [OtpController::class, 'verifyOtp']);
+// Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
 
 Route::apiResource('roadmaps', RoadMapController::class);
 

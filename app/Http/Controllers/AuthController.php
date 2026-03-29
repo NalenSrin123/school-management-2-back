@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -86,41 +85,6 @@ class AuthController extends Controller
         }
     }
 
-    public function sendOtp(Request $request)
-    {
-        try {
-            // 1. Validate that the email is provided and exists in the users table
-            $request->validate([
-                'email' => 'required|email|exists:users,email'
-            ]);
-
-            $email = $request->input('email');
-
-            // 2. Generate a random 6-digit OTP
-            $otp = rand(100000, 999999);
-
-            // 3. Store the OTP in the Cache for 5 minutes
-            // We use the email as the cache key so we can look it up later
-            Cache::put('otp_' . $email, $otp, now()->addMinutes(5));
-
-            // 4. Send the OTP via Email
-            // Note: For production, it is better to create a Mailable class (e.g., php artisan make:mail OtpMail)
-            Mail::raw("Your OTP for login is: $otp. It will expire in 5 minutes.", function ($message) use ($email) {
-                $message->to($email)
-                        ->subject('Your Login OTP');
-            });
-
-            return response()->json([
-                'message' => 'OTP sent successfully. Please check your email.',
-            ], 200);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Failed to send OTP: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
     public function verifyOtp(Request $request)
     {
         try {
@@ -159,7 +123,4 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
-
 }
-
