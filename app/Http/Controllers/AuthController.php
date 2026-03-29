@@ -25,7 +25,7 @@ class AuthController extends Controller
                 'role_id' => 'sometimes|exists:roles,id',
             ]);
 
-            
+
             $role_id = $validated['role_id'] ?? 2;
 
 

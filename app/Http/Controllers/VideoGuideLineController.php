@@ -83,4 +83,11 @@ class VideoGuideLineController extends Controller
             'message' => 'Video guideline deleted'
         ]);
     }
+
+    //Show video
+    public function latestVideos()
+    {
+        $videos = VideoGuideLine::latest()->take(8)->get();
+        return response()->json($videos);
+    }
 }

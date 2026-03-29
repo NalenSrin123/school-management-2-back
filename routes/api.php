@@ -57,4 +57,9 @@ Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
 
 Route::apiResource('roadmaps', RoadMapController::class);
 
-Route::apiResource('videoguidelines', VideoGuideLineController::class);
+Route::get('/videoguidelines', [VideoGuideLineController::class, 'index']);      // Get all
+Route::get('/videoguidelines/latest', [VideoGuideLineController::class, 'latestVideos']); // Get latest videos
+Route::post('/videoguidelines', [VideoGuideLineController::class, 'store']);     // Create
+Route::get('/videoguidelines/{id}', [VideoGuideLineController::class, 'show']);  // Get one
+Route::put('/videoguidelines/{id}', [VideoGuideLineController::class, 'update']); // Update
+Route::delete('/videoguidelines/{id}', [VideoGuideLineController::class, 'destroy']); // Delete
