@@ -70,7 +70,7 @@ Route::post('/videoguidelines', [VideoGuideLineController::class, 'store']);    
 Route::get('/videoguidelines/{id}', [VideoGuideLineController::class, 'show']);  // Get one
 Route::put('/videoguidelines/{id}', [VideoGuideLineController::class, 'update']); // Update
 Route::delete('/videoguidelines/{id}', [VideoGuideLineController::class, 'destroy']); // Delete
-Route::apiResource('videoguidelines', VideoGuideLineController::class);
+// Route::apiResource('videoguidelines', VideoGuideLineController::class);
 
 Route::post('/feedbacks', [FeedbackController::class, 'store']);
 Route::apiResource('feedbacks', FeedbackController::class)->except(['store'])->middleware('auth:sanctum');

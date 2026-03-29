@@ -55,4 +55,9 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    public function videoguidelines()
+    {
+        return $this->hasMany(VideoGuideLine::class, 'uploaded_by');
+    }
 }
