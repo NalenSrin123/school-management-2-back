@@ -7,34 +7,47 @@ use Illuminate\Http\Request;
 
 class RoadMapController extends Controller
 {
-    // Show all
+    // GET /roadmaps
     public function index()
     {
         return response()->json(RoadMap::all());
     }
 
-    // Create
+    // POST /roadmaps
     public function store(Request $request)
     {
-        $roadmap = RoadMap::create($request->all());
+        $validated = $request->validate([
+            'image' => 'required|string',
+            'title' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $roadmap = RoadMap::create($validated);
         return response()->json($roadmap, 201);
     }
 
-    // Show by ID
+    // GET /roadmaps/{id}
     public function show($id)
     {
         return response()->json(RoadMap::findOrFail($id));
     }
 
-    // Update
+    // PUT /roadmaps/{id}
     public function update(Request $request, $id)
     {
         $roadmap = RoadMap::findOrFail($id);
-        $roadmap->update($request->all());
+
+        $validated = $request->validate([
+            'image' => 'sometimes|string',
+            'title' => 'sometimes|string',
+            'description' => 'sometimes|string',
+        ]);
+
+        $roadmap->update($validated);
         return response()->json($roadmap);
     }
 
-    // Delete
+    // DELETE /roadmaps/{id}
     public function destroy($id)
     {
         RoadMap::findOrFail($id)->delete();
