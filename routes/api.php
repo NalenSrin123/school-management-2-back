@@ -12,6 +12,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfileSchoolController;
 use App\Http\Controllers\VideoGuideLineController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,5 +82,11 @@ Route::get('/courses', [CourseController::class, 'index']);
 Route::get('/courses-most-viewed', [CourseController::class, 'mostViewed']);
 Route::get('/courses/{id}', [CourseController::class, 'show']);
 
+// Events
+Route::get('/events', [EventController::class, 'index']);
+Route::post('/events', [EventController::class, 'store']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'destroy']); 
 // Banners
 Route::apiResource('banners', BannerController::class);
