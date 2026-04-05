@@ -20,7 +20,7 @@ class BannerController extends Controller
             'image'     => 'required|string',
             'title'     => 'required|string',
             'link_url'  => 'required|string',
-            'is_active' => 'required|string|in:Pending,Active,Inactive',
+            'is_active' => 'required|boolean',
         ]);
 
         $banner = Banner::create($validated);
@@ -42,7 +42,7 @@ class BannerController extends Controller
             'image'     => 'sometimes|string',
             'title'     => 'sometimes|string',
             'link_url'  => 'sometimes|string',
-            'is_active' => 'sometimes|string|in:Pending,Active,Inactive',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $banner->update($validated);
