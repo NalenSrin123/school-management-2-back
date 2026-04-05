@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('road_maps', function (Blueprint $table) {
             $table->id();
-            $table->text('image');
+            $table->string('image');
             $table->string('title');
             $table->text('description');
             $table->timestamps();

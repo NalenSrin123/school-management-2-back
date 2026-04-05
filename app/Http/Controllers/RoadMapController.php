@@ -16,13 +16,20 @@ class RoadMapController extends Controller
     // POST /roadmaps
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'image' => 'required|string',
+        $request->validate([
+            'image' => 'required|image',
             'title' => 'required|string',
             'description' => 'required|string',
         ]);
 
-        $roadmap = RoadMap::create($validated);
+        $path = $request->file('image')->store('roadmaps', 'public');
+
+        $roadmap = RoadMap::create([
+            'image' => asset('storage/' . $path),
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
         return response()->json($roadmap, 201);
     }
 
@@ -37,13 +44,17 @@ class RoadMapController extends Controller
     {
         $roadmap = RoadMap::findOrFail($id);
 
-        $validated = $request->validate([
-            'image' => 'sometimes|string',
-            'title' => 'sometimes|string',
-            'description' => 'sometimes|string',
-        ]);
+        $data = [];
 
-        $roadmap->update($validated);
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('roadmaps', 'public');
+            $data['image'] = asset('storage/' . $path);
+        }
+
+        if ($request->filled('title')) $data['title'] = $request->title;
+        if ($request->filled('description')) $data['description'] = $request->description;
+
+        $roadmap->update($data);
         return response()->json($roadmap);
     }
 
