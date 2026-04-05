@@ -26,13 +26,13 @@ class RoadMapController extends Controller
         return response()->json($roadmap, 201);
     }
 
-    // Show by ID
+    // GET /roadmaps/{id}
     public function show($id)
     {
         return response()->json(RoadMap::findOrFail($id));
     }
 
-    // Update
+    // PUT /roadmaps/{id}
     public function update(Request $request, $id)
     {
         $roadmap = RoadMap::findOrFail($id);
@@ -47,7 +47,7 @@ class RoadMapController extends Controller
         return response()->json($roadmap);
     }
 
-    // Delete
+    // DELETE /roadmaps/{id}
     public function destroy($id)
     {
         RoadMap::findOrFail($id)->delete();
