@@ -23,6 +23,7 @@ class FeedbackController extends Controller
             'rating' => 'nullable|integer|min:1|max:5'
         ]);
 
+        $validated['user_id'] = auth()->id();
         $feedback = Feedback::create($validated);
         return response()->json($feedback, 201);
     }
