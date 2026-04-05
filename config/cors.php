@@ -7,7 +7,7 @@ return [
     'allowed_methods' => ['*'],
 
     // ❌ DO NOT use '*' when using credentials
-    'allowed_origins' => ['http://localhost:3000'], // React URL
+    'allowed_origins' => ['*'], // React URL
 
     'allowed_origins_patterns' => [],
 
