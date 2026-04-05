@@ -62,6 +62,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.des
 // Route::post('/otp/verify', [OtpController::class, 'verifyOtp']);
 // Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
 
+// Roadmaps
 Route::apiResource('roadmaps', RoadMapController::class);
 
 Route::get('/videoguidelines', [VideoGuideLineController::class, 'index']);      // Get all
